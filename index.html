@@ -42,7 +42,7 @@
   section > .wrap > h2{font-size:clamp(23px,3.2vw,32px);margin-bottom:6px}
   .lead{color:var(--muted);max-width:700px;margin-bottom:22px}
 
-  #map{height:520px;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);background:#dfe6e8}
+  #route-map{height:520px;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);background:#dfe6e8}
   .maprow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:14px}
   .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
   .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -136,7 +136,7 @@
   <div class="wrap">
     <h2>The route</h2>
     <p class="lead">A clockwise loop: the high cols on the way in, three nights on the French side around Gavarnie, then the Bielsa tunnel into Spain for Ordesa and west to the coast. The line follows the real roads. Tap any pin for details and a Google Maps link.</p>
-    <div id="map"></div>
+    <div id="route-map"></div>
     <div class="maprow">
       <div class="legend">
         <span><i class="dot" style="background:var(--ochre)"></i> Night stop</span>
@@ -329,18 +329,26 @@ const SIGHTS = [
   {name:"Auberge des Aryelets, Aulon", lat:42.7885, lon:0.3071, type:"red", note:"Bib Gourmand lunch, Vallée d'Aure (Day 2)"},
   {name:"Col du Tourmalet", lat:42.9072, lon:0.1444, type:"slate", note:"2,115 m · the col"},
   {name:"Pic du Midi de Bigorre", lat:42.9369, lon:0.1428, type:"slate", note:"2,877 m observatory + skywalk"},
-  {name:"Cirque de Gavarnie", lat:42.7008, lon:-0.0090, type:"green", note:"UNESCO cirque, tallest falls in Europe"},
-  {name:"Pont d'Espagne", lat:42.8520, lon:-0.1366, type:"green", note:"Waterfalls + Lac de Gaube"},
-  {name:"Lacs du Néouvielle", lat:42.8520, lon:0.1430, type:"green", note:"Granite lake loop (Day 4)"},
+  {name:"Cirque de Gavarnie", lat:42.7008, lon:-0.0090, type:"green", note:"UNESCO cirque, tallest falls in Europe", url:"https://www.alltrails.com/trail/france/hautes-pyrenees/cirque-de-gavarnie"},
+  {name:"Pont d'Espagne", lat:42.8520, lon:-0.1366, type:"green", note:"Waterfalls + Lac de Gaube", url:"https://www.alltrails.com/trail/france/hautes-pyrenees/le-lac-de-gaube-via-le-pont-d-espagne"},
+  {name:"Lacs du Néouvielle", lat:42.8520, lon:0.1430, type:"green", note:"AllTrails saved hike · Moderate · 10.3 km", url:"https://www.alltrails.com/trail/france/hautes-pyrenees/lac-d-oredon-lac-d-aubert-et-lac-d-aumar"},
   {name:"Tunnel de Bielsa", lat:42.7280, lon:0.2700, type:"slate", note:"Border crossing to Spain (Day 5)"},
-  {name:"Pradera de Ordesa", lat:42.6400, lon:-0.0830, type:"green", note:"Ordesa trailhead (shuttle from Torla)"},
+  {name:"Pradera de Ordesa", lat:42.6400, lon:-0.0830, type:"green", note:"Ordesa trailhead (shuttle from Torla)", url:"https://www.alltrails.com/trail/spain/huesca/pradera-de-ordesa-circo-de-soaso-cola-de-caballo"},
   {name:"Cola de Caballo", lat:42.5900, lon:-0.0250, type:"green", note:"Falls at the head of the Ordesa valley"},
   {name:"Espelette", lat:43.3414, lon:-1.4475, type:"slate", note:"The pepper village (Day 8)"},
   {name:"La Rhune", lat:43.3094, lon:-1.6356, type:"slate", note:"Cog railway, both coasts in view (Day 8)"},
   {name:"Elkano · Getaria", lat:43.3050, lon:-2.2010, type:"red", note:"World-benchmark grilled turbot"},
   {name:"Zumaia flysch", lat:43.2975, lon:-2.2558, type:"green", note:"60-million-year rock strata"},
   {name:"Saint-Jean-de-Luz", lat:43.3880, lon:-1.6597, type:"slate", note:"Macarons + the bay (Day 8)"},
-  {name:"Bayonne", lat:43.4929, lon:-1.4748, type:"slate", note:"Chocolate under the arcades (Day 10)"}
+  {name:"Bayonne", lat:43.4929, lon:-1.4748, type:"slate", note:"Chocolate under the arcades (Day 10)"},
+  {name:"Ayous Lakes", lat:42.86861, lon:-0.4483, type:"green", note:"AllTrails saved hike · Hard · 15.8 km", url:"https://www.alltrails.com/trail/france/pyrenees-atlantiques/sentier-du-tour-des-lacs-d-ayous"},
+  {name:"Hacia las Agulles de Amitges", lat:42.58235, lon:1.01126, type:"green", note:"AllTrails saved hike · Hard · 8.7 km", url:"https://www.alltrails.com/trail/spain/lleida/hacia-las-agulles-de-amitges", fit:false},
+  {name:"Sant Maurici Lake - Ratera Lake", lat:42.58237, lon:1.01125, type:"green", note:"AllTrails saved hike · Moderate · 5.1 km", url:"https://www.alltrails.com/trail/spain/lleida/lago-de-sant-maurici-lago-ratera", fit:false},
+  {name:"Arado Waterfall Trail - Blue Well", lat:41.71966, lon:-8.1308, type:"green", note:"AllTrails saved hike · Moderate · 10.3 km", url:"https://www.alltrails.com/trail/portugal/braga/trilho-da-cascata-do-arado-e-poco-azul", fit:false},
+  {name:"Northern Way: Pasaia - San Sebastian", lat:43.32522, lon:-1.92549, type:"green", note:"AllTrails saved hike · Moderate · 13.4 km", url:"https://www.alltrails.com/trail/spain/gipuzkoa/camino-del-norte-pasaia-a-san-sebastian"},
+  {name:"Lac d'Oô", lat:42.7632, lon:0.50181, type:"green", note:"AllTrails saved hike · Moderate · 6.6 km", url:"https://www.alltrails.com/trail/france/haute-garonne/lac-d-oo"},
+  {name:"PR-PNPE 3 Cares Trail", lat:43.25811, lon:-4.8304, type:"green", note:"AllTrails saved hike · Hard · 12.4 km", url:"https://www.alltrails.com/trail/spain/asturias/pr-pnpe-3-ruta-del-cares--2", fit:false},
+  {name:"Gavarnie - Cirque de Gavarnie", lat:42.73409, lon:-0.00974, type:"green", note:"AllTrails saved hike · Moderate · 10.5 km", url:"https://www.alltrails.com/trail/france/hautes-pyrenees/gavarnie-gavarnie-cirque"}
 ];
 
 const TYPE_COLOR = {ochre:"#bd6233", green:"#2f4636", slate:"#46586a", red:"#a23b34"};
@@ -394,7 +402,7 @@ BASES.forEach(b=>{
 });
 
 /* ---------- map ---------- */
-const map = L.map("map", {scrollWheelZoom:false}).setView([42.9, -0.7], 8);
+const map = L.map("route-map", {scrollWheelZoom:false}).setView([42.9, -0.7], 8);
 const positron = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
   {attribution:'&copy; OpenStreetMap, &copy; CARTO', maxZoom:19}).addTo(map);
 const topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
@@ -412,9 +420,10 @@ BASES.forEach(b=>{
 });
 SIGHTS.forEach(s=>{
   const icon = L.divIcon({className:"", html:`<div class="sdot" style="background:${TYPE_COLOR[s.type]}"></div>`, iconSize:[15,15], iconAnchor:[7,7], popupAnchor:[0,-6]});
+  const trailLink = s.url ? `<br><a href="${s.url}" target="_blank" rel="noopener">Open on AllTrails →</a>` : "";
   L.marker([s.lat,s.lon],{icon}).addTo(map)
-    .bindPopup(`<b>${s.name}</b><br>${s.note}<br><a href="${gmapSearch(s.name)}" target="_blank" rel="noopener">Open in Google Maps →</a>`);
-  allPts.push([s.lat,s.lon]);
+    .bindPopup(`<b>${s.name}</b><br>${s.note}<br><a href="${gmapSearch(s.name)}" target="_blank" rel="noopener">Open in Google Maps →</a>${trailLink}`);
+  if(s.fit !== false) allPts.push([s.lat,s.lon]);
 });
 map.fitBounds(allPts, {padding:[40,40]});
 
